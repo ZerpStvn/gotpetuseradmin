@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "234195727900",
+    "project_id": "ipet-ededd",
+    "storage_bucket": "ipet-ededd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:234195727900:android:a4f68db0d00ed2ac2251d9",
+        "android_client_info": {
+          "package_name": "com.example.gopetadmin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsn3H9vk7VAMQlfej4DTEn_ywx6S9Z8Xc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:234195727900:android:be672fe716d70aeb2251d9",
+        "android_client_info": {
+          "package_name": "com.example.ipet"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsn3H9vk7VAMQlfej4DTEn_ywx6S9Z8Xc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:234195727900:android:7c1e42ef92f6541e2251d9",
+        "android_client_info": {
+          "package_name": "com.ipetuseradmin.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsn3H9vk7VAMQlfej4DTEn_ywx6S9Z8Xc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,34 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "ipet-ededd",
+          "appId": "1:234195727900:android:7c1e42ef92f6541e2251d9",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "ipet-ededd",
+          "configurations": {
+            "android": "1:234195727900:android:7c1e42ef92f6541e2251d9",
+            "ios": "1:234195727900:ios:0cbb9d3b63c891612251d9",
+            "macos": "1:234195727900:ios:0cbb9d3b63c891612251d9",
+            "web": "1:234195727900:web:0e8454563c5cd3bb2251d9",
+            "windows": "1:234195727900:web:e3d4cdad69dcd7e92251d9"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "site": "gopetadmin",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
