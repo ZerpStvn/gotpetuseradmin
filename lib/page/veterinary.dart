@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ipetuseradmin/page/service.dart';
 
 class VeterinaryPage extends StatefulWidget {
   const VeterinaryPage({super.key});
@@ -9,6 +10,7 @@ class VeterinaryPage extends StatefulWidget {
 }
 
 class _VeterinaryPageState extends State<VeterinaryPage> {
+  final _emailservice = EmailService();
   Map<String, dynamic> veterinayuser = {};
   bool isloadvalidate = false;
   String message = "";
@@ -356,8 +358,15 @@ class _VeterinaryPageState extends State<VeterinaryPage> {
                                               color: Colors.green,
                                             )
                                           : ElevatedButton(
-                                              onPressed: () {
+                                              onPressed: () async {
                                                 approvecertificate(userID);
+                                                _emailservice.sendMailVerified(
+                                                    recipientEmail:
+                                                        "Email: ${user['email']}",
+                                                    message:
+                                                        "Your Account is Now verified you can now use our platform",
+                                                    subject:
+                                                        "PetGo - Account Verified");
                                               },
                                               child: const Text("Approve")),
                                       const SizedBox(
