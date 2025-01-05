@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ipetuseradmin/page/service.dart';
@@ -14,6 +15,7 @@ class _VeterinaryPageState extends State<VeterinaryPage> {
   Map<String, dynamic> veterinayuser = {};
   bool isloadvalidate = false;
   String message = "";
+  bool isveryfied = false;
   Future<List<Map<String, dynamic>>> _getUsers() async {
     final QuerySnapshot snapshot = await FirebaseFirestore.instance
         .collection('users')
@@ -184,11 +186,53 @@ class _VeterinaryPageState extends State<VeterinaryPage> {
                               DataCell(Text(user['nameclinic'] ?? '')),
                               DataCell(Text(user['pnum'] ?? '')),
                               DataCell(
-                                ElevatedButton(
-                                  onPressed: () {
-                                    _showUserDetails(user, user['vetid']);
-                                  },
-                                  child: const Text("View"),
+                                Row(
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        _showUserDetails(user, user['vetid']);
+                                      },
+                                      child: const Text("View"),
+                                    ),
+                                    const SizedBox(
+                                      width: 20,
+                                    ),
+                                    isveryfied == false
+                                        ? FutureBuilder<bool>(
+                                            future:
+                                                ischeckedrole(user['vetid']),
+                                            builder: (context, snapshot) {
+                                              if (snapshot.connectionState ==
+                                                  ConnectionState.waiting) {
+                                                // Show a loading indicator while the future is being resolved
+                                                return const CircularProgressIndicator();
+                                              } else if (snapshot.hasError) {
+                                                // Handle error case
+                                                return const Icon(
+                                                  Icons.error,
+                                                  color: Colors.red,
+                                                );
+                                              } else if (snapshot.hasData &&
+                                                  snapshot.data == true) {
+                                                // Role is verified
+                                                return const Icon(
+                                                  Icons.check_box_rounded,
+                                                  color: Colors.green,
+                                                );
+                                              } else {
+                                                // Role is not verified
+                                                return ElevatedButton(
+                                                  onPressed: () {
+                                                    getuserverficationrole(
+                                                        user['vetid']);
+                                                  },
+                                                  child: const Text("Verify"),
+                                                );
+                                              }
+                                            },
+                                          )
+                                        : Container(),
+                                  ],
                                 ),
                               ),
                             ],
@@ -404,5 +448,43 @@ class _VeterinaryPageState extends State<VeterinaryPage> {
         );
       },
     );
+  }
+
+  Future<bool> ischeckedrole(String userid) async {
+    DocumentSnapshot snapshots =
+        await FirebaseFirestore.instance.collection('users').doc(userid).get();
+
+    if (snapshots['isverified'] != 1) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  Future<void> getuserverficationrole(String userid) async {
+    try {
+      setState(() {
+        isveryfied = true;
+      });
+      DocumentSnapshot snapshots = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userid)
+          .get();
+
+      if (snapshots['isverified'] != 1) {
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userid)
+            .update({"isverified": 1});
+      }
+      setState(() {
+        isveryfied = false;
+      });
+    } catch (error) {
+      debugPrint("$error");
+      setState(() {
+        isveryfied = false;
+      });
+    }
   }
 }
