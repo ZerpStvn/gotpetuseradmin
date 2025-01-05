@@ -222,9 +222,16 @@ class _VeterinaryPageState extends State<VeterinaryPage> {
                                               } else {
                                                 // Role is not verified
                                                 return ElevatedButton(
-                                                  onPressed: () {
+                                                  onPressed: () async {
                                                     getuserverficationrole(
                                                         user['vetid']);
+                                                    _emailservice.sendMailVerified(
+                                                        recipientEmail:
+                                                            "Email: ${user['email']}",
+                                                        message:
+                                                            "Your Account is Now verified you can now use our platform",
+                                                        subject:
+                                                            "PetGo - Account Verified");
                                                   },
                                                   child: const Text("Verify"),
                                                 );
